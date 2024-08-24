@@ -4,30 +4,20 @@ run:
   timeout: 10m
   issues-exit-code: 1
   tests: true
-  skip-dirs:
-    - bin
-    - vendor
-    - var
-    - tmp
-    - .cache
-  skip-files:
-    - \.pb\.go$
-    - \.pb\.gw\.go$
 
 output:
-  format: colored-line-number
+  formats: ["colored-line-number"]
   print-issued-lines: true
   print-linter-name: true
 
 linters-settings:
-  govet:
-    check-shadowing: true
+  shadow: true
   dupl:
     threshold: 100
   goconst:
-    min-len:         2
+    min-len: 2
     min-occurrences: 2
- 
+
 linters:
   disable-all: true
   enable:
@@ -37,13 +27,22 @@ linters:
     - gosec
     - govet
     - ineffassign
-    - megacheck
-    - revive
-    - typecheck
+    - gosimple
+    - staticcheck
     - unused
+    - revive
 
 issues:
   exclude-use-default: false
+  exclude-dirs:
+    - bin
+    - vendor
+    - var
+    - tmp
+    - .cache
+  exclude-files:
+    - \.pb\.go$
+    - \.pb\.gw\.go$
   exclude:
     # _ instead of err checks
     - G104
